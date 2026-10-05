@@ -1,0 +1,44 @@
+{
+  "name": "@manpro/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/server.ts",
+    "build": "node build.mjs",
+    "start": "node --env-file=.env dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx --env-file=.env src/db/migrate.ts",
+    "db:seed": "tsx --env-file=.env src/db/seed.ts",
+    "start:worker": "node --env-file=.env dist/worker.js",
+    "load-test": "tsx --env-file=.env scripts/load-test.ts",
+    "db:seed-demo": "tsx --env-file=.env src/db/seed-demo.ts",
+    "db:reset": "tsx --env-file=.env src/db/reset.ts",
+    "db:demo": "tsx --env-file=.env src/db/reset.ts --yes && tsx --env-file=.env src/db/seed-demo.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.1.2",
+    "@fastify/cors": "^11.3.0",
+    "@fastify/multipart": "^10.1.2",
+    "@manpro/shared": "workspace:*",
+    "better-auth": "^1.7.6",
+    "bullmq": "^6.3.9",
+    "drizzle-orm": "^0.45.3",
+    "exceljs": "^4.4.0",
+    "fastify": "^5.12.5",
+    "ioredis": "^6.0.0",
+    "mysql2": "^3.24.4",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "drizzle-kit": "^0.31.11",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  }
+}

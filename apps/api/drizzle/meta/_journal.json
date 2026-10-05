@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1790657189724,
+      "tag": "0000_wide_roughhouse",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1790658651285,
+      "tag": "0001_woozy_may_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1790660238481,
+      "tag": "0002_abnormal_microchip",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1790662752017,
+      "tag": "0003_eminent_maddog",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1790663998986,
+      "tag": "0004_shallow_terror",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1790675807229,
+      "tag": "0005_sharp_salo",
+      "breakpoints": true
+    }
+  ]
+}

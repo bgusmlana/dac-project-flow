@@ -1,0 +1,17 @@
+{
+  "name": "manajemen-project",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --parallel --filter ./apps/* dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "db:migrate": "pnpm --filter @manpro/api db:migrate",
+    "db:seed": "pnpm --filter @manpro/api db:seed",
+    "db:seed-demo": "pnpm --filter @manpro/api db:seed-demo",
+    "db:reset": "pnpm --filter @manpro/api db:reset",
+    "db:demo": "pnpm --filter @manpro/api db:demo"
+  },
+  "packageManager": "pnpm@11.20.0"
+}
