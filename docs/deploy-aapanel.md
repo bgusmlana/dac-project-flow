@@ -7,7 +7,7 @@
 ```
 Browser → Nginx aaPanel (HTTPS)
             ├─ /        → file statis apps/web/dist
-            └─ /api/    → Node API (port 3000, dijalankan PM2)
+            └─ /api/    → Node API (port 3100, dijalankan PM2)
                           Worker antrean (PM2) · MySQL 8 · Redis (aaPanel)
 ```
 
@@ -22,9 +22,26 @@ Browser → Nginx aaPanel (HTTPS)
 2. Pastikan Redis berjalan (App Store → Redis). Prefix key sudah diatur aplikasi (`manpro`).
 
 ## 2. Ambil kode & build
+Repo private, jadi server memakai **Deploy Key** (SSH, hanya-baca) agar `git pull` tanpa login:
+```
+ssh-keygen -t ed25519 -C "aapanel-manpro" -f ~/.ssh/manpro_deploy -N ""
+cat ~/.ssh/manpro_deploy.pub     # salin hasilnya
+```
+GitHub → repo → Settings → Deploy keys → Add deploy key → tempel (jangan centang *Allow write access*). Lalu:
+```
+cat >> ~/.ssh/config <<'EOT'
+Host github-manpro
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/manpro_deploy
+  IdentitiesOnly yes
+EOT
+chmod 600 ~/.ssh/config
+```
+Ambil kode dan build:
 ```
 cd /www/wwwroot
-git clone <repo> manpro && cd manpro
+git clone git@github-manpro:bgusmlana/dac-project-flow.git manpro && cd manpro
 pnpm install --frozen-lockfile
 pnpm --filter @manpro/api build
 pnpm --filter @manpro/web build
@@ -33,7 +50,7 @@ pnpm --filter @manpro/web build
 ## 3. Berkas rahasia `apps/api/.env`
 ```
 NODE_ENV=production
-PORT=3000
+PORT=3100
 DATABASE_URL=mysql://manpro:PASSWORD@127.0.0.1:3306/manpro
 REDIS_URL=redis://127.0.0.1:6379
 BETTER_AUTH_SECRET=<openssl rand -hex 32>
@@ -115,7 +132,7 @@ pm2 restart manpro-api manpro-worker
 ```
 
 ## Pemeriksaan jika bermasalah
-- API: `curl http://127.0.0.1:3000/api/health` harus membalas OK.
+- API: `curl http://127.0.0.1:3100/api/health` harus membalas OK.
 - Login gagal / cookie tidak tersimpan → cek `BETTER_AUTH_URL` & `WEB_ORIGIN` harus persis `https://DOMAIN`.
 - Upload ditolak → cek `client_max_body_size`.
 - Import/export tidak jalan → cek `manpro-worker` online dan Redis aktif.
